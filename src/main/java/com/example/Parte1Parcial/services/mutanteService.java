@@ -5,7 +5,6 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import com.example.Parte1Parcial.entities.Algoritmo.mutantePrueba;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,7 +51,7 @@ public class mutanteService implements BaseService<pruebasADN> {
     @Transactional
     public pruebasADN save(pruebasADN entity) throws Exception {
         try{
-            boolean esMutante = new mutantePrueba().esMutante(entity.getPrueba());
+            boolean esMutante = mutantePrueba.esMutante(entity.getPrueba());
             entity.setResultado(esMutante);
 
             entity = mutanteRepository.save(entity);
@@ -92,6 +91,59 @@ public class mutanteService implements BaseService<pruebasADN> {
         }
     }
 
+
+@Override
+@Transactional
+public boolean mutant(String[] dna) throws Exception {
+    // No capturar excepciones aquí, solo propaga
+    return mutantePrueba.esMutante(dna);
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
     @Override
     @Transactional
@@ -104,12 +156,6 @@ public class mutanteService implements BaseService<pruebasADN> {
         }
     }
 */
-@Override
-@Transactional
-public boolean mutant(String[] dna) throws Exception {
-    // No capturar excepciones aquí, solo propaga
-    return mutantePrueba.esMutante(dna);
-}
 
 /*
     @Override
@@ -125,4 +171,3 @@ public boolean mutant(String[] dna) throws Exception {
         }
     }
 */
-}

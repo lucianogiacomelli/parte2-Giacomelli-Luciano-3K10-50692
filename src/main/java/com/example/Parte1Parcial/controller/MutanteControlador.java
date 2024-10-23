@@ -87,6 +87,8 @@ public class MutanteControlador {
         try{
 
             boolean esMutante = mutanteService.mutant(pruebasADN.getPrueba());
+            pruebasADN.setResultado(esMutante);
+            mutanteService.save(pruebasADN);
             if (esMutante){
                 return ResponseEntity.status(HttpStatus.OK).body("Es mutante");
             } else {
